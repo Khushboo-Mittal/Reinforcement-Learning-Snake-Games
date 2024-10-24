@@ -1,56 +1,28 @@
+# META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-# import random
-# import numpy as np
-# import pickle
+    # Developer details: 
+        # Name: Khushboo Mittal
+        # Role: Architect
+    # Version:
+        # Version: V 1.0 (24 October 2024)
+            # Developers: Khushboo Mittal
+            # Unit test: Pass
+            # Integration test: Pass
+     
+     # Description: This code snippet implements a SARSA-based Snake Game using Pygame. The snake is trained through 
+     # Reinforcement Learning to learn optimal movement strategies using the SARSA algorithm. The objective is to 
+     # avoid collisions while eating randomly placed apples. The game tracks the agent's state and updates the Q-table accordingly.
 
-# class RL:
-#     def __init__(self, actions, e=0.05, a=0.1, g=0.95):
-#         self.Q = {}
-#         self.A = actions
-#         self.e = e  # epsilon (exploration rate)
-#         self.a = a  # alpha (learning rate)
-#         self.g = g  # gamma (discount factor)
+# CODE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-#     def getQ(self, state, action):
-#         return self.Q.get((state, action), 0.0)
-
-#     def setQ(self, Q):
-#         self.Q = Q
-
-#     def loadQ(self):
-#         try:
-#             self.Q = pickle.load(open("Q.txt", "rb"))
-#         except (FileNotFoundError, EOFError):
-#             print("Q.txt not found. Initializing empty Q-table.")
-#             self.Q = {}
-
-#     def saveQ(self):
-#         try:
-#             with open("Q.txt", "wb") as f:
-#                 pickle.dump(self.Q, f)
-#             print("Q-table saved successfully.")
-#         except Exception as e:
-#             print(f"Error saving Q-table: {e}")
-
-#     def getA(self, state):
-#     # Explore: choose a random action with probability epsilon
-#         if random.random() < self.e:
-#             return random.choice(self.A)  # Random action (explore)
-
-#         # Exploit: choose the action with the maximum Q value
-#         q_values = [self.getQ(state, a) for a in self.A]
-#         max_q = max(q_values)
-
-#         # Get all actions with the highest Q value and choose randomly among them
-#         best_actions = [a for a, q in zip(self.A, q_values) if q == max_q]
-#         return random.choice(best_actions)
-
-
-# class Sarsa(RL):
-#     def updateQ(self, state, action, new_state, new_action, reward):
-#         q = self.getQ(state, action)
-#         new_q = self.getQ(new_state, new_action)
-#         self.Q[(state, action)] = q + self.a * (reward + self.g * new_q - q)
+    # Dependency: 
+        # Environment:     
+            # Python: 3.11.5
+            # Pygame: 2.1.0
+        
+            
+            
+#to run: python app.py  
 
 import random
 import pickle

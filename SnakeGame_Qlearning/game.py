@@ -7,6 +7,7 @@ import time
 
 # color class
 class Color:
+    # Define colors as RGB tuples
     def __init__(self):
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
@@ -28,12 +29,13 @@ class VisualSnake:
         
         # padding for score & episode
         self.padding = int(30 * self.scale)
-        self.screen_width = self.game_width
-        self.screen_height = self.game_height + self.padding
-         
+        self.screen_width = self.game_width # Total screen width
+        self.screen_height = self.game_height + self.padding # Total screen height
+        
+        # Size of the snake and food blocks 
         self.snake_size = int(10 * self.scale)
         self.food_size = int(10 * self.scale)
-        self.snake_speed = 40
+        self.snake_speed = 40 # Speed of the snake in the game
                  
         self.snake_coords = []
         self.snake_length = 1
@@ -47,45 +49,64 @@ class VisualSnake:
         self.x1 = self.game_width / 2
         self.y1 = self.game_height / 2 + self.padding
         
+        # Convert the snake's position from pixel coordinates to grid coordinates
         self.r1, self.c1 = self.coords_to_index(self.x1, self.y1)
         self.board[self.r1][self.c1] = 1
-             
+        
+        # Initialize changes in coordinates (for movement)     
         self.c_change = 1
         self.r_change = 0
           
         self.food_r, self.food_c = self.generate_food()
         self.board[self.food_r][self.food_c] = 2
+        
+        # Counter to track how long the snake has survived without eating food
         self.survived = 0
+        
+        # Initialize Pygame, setting up the environment for the game
         pygame.init()
+        # Create an instance of the Color class to manage colors in the game
         self.color = Color()
                   
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height)) 
+        
+        # Create a clock object to control the frame rate of the game
         self.clock = pygame.time.Clock()
-         
+        # Load a font for displaying text in the game (e.g., score, instructions) 
         self.font = pygame.font.SysFont("bahnschrift", int(18 * self.scale))
+        # Variable to track the last direction the snake moved (useful for avoiding opposite direction input)
         self.last_dir = None
         self.step()
         
     def print_score(self, score):
+        # Render the score text with white color
         value = self.font.render(f"Score: {score}", True, self.color.white)
         self.screen.blit(value, [500 * self.scale, 10])
         
     def print_episode(self):
+        # Check if the episode number should be displayed
         if self.show_episode:
+            # Render the episode text with white color
             value = self.font.render(f"Episode: {self.episode}", True, self.color.white)
+            # Display the episode number on the screen at specified coordinates
             self.screen.blit(value, [10, 10])
         
     def draw_snake(self):
+        # Loop through the snake's coordinates in reverse order (to draw the tail first)
         for i in range(len(self.snake_coords) - 1, -1, -1):
             r, c = self.snake_coords[i]
             x, y = self.index_to_coords(r, c)
+            
+            # Draw the head of the snake in blue
             if i == len(self.snake_coords) - 1:
                 # head square color
                 pygame.draw.rect(self.screen, self.color.blue, [x, y, self.snake_size, self.snake_size])
+            # Draw the head of the snake in blue
             else:
                 pygame.draw.rect(self.screen, self.color.green, [x, y, self.snake_size, self.snake_size])
             
     def game_end_message(self):
+        # Render the game over message in red
         mesg = self.font.render("Game over!", True, self.color.red)
         self.screen.blit(mesg, [2 * self.game_width / 5, 2 * self.game_height / 5 + self.padding])
         
@@ -98,7 +119,7 @@ class VisualSnake:
         else:
           return 1
 
-    # returns tuple of 12 features
+
     def get_state(self):
         head_r, head_c = self.snake_coords[-1]
         state = []
@@ -114,7 +135,7 @@ class VisualSnake:
         state.append(self.is_unsafe(head_r - 1, head_c))
         state.append(self.is_unsafe(head_r, head_c + 1))
         state.append(self.is_unsafe(head_r, head_c - 1))
-        return tuple(state)
+        return tuple(state) # returns tuple of 12 features
     
                 
     def valid_index(self, r, c):
@@ -132,27 +153,38 @@ class VisualSnake:
     
     # randomly place food
     def generate_food(self):
+        # Generate random food coordinates within the game area
         food_c = int(round(random.randrange(0, self.game_width - self.food_size) / self.food_size))
         food_r = int(round(random.randrange(0, self.game_height - self.food_size) / self.food_size))
+        
+        # Check if the generated food coordinates overlap with the snake
         if self.board[food_r][food_c] != 0:
+            # If there is overlap, recursively generate new food coordinates
             food_r, food_c = self.generate_food()
+        # Return the valid food coordinates
         return food_r, food_c
     
     def game_over(self):
+        # Return the current state of the game (whether the game is over)
         return self.game_close
         
         
     def step(self, action="None"):
+        # If no action is provided, randomly choose one
         if action == "None":
             action = random.choice(["left", "right", "up", "down"])
         else:
+            # Map the action index to its corresponding direction
             action = ["left", "right", "up", "down"][action]
         
+        # Process events in the Pygame event queue
         for event in pygame.event.get():
             pass
  
         # take action
-        self.last_dir = self.dir
+        self.last_dir = self.dir # Store the last direction the snake was moving
+        
+        # Update the direction and changes in coordinates based on the action taken
         if action == "left" and (self.dir != "right" or self.snake_length == 1):
             self.c_change = -1
             self.r_change = 0
@@ -170,30 +202,37 @@ class VisualSnake:
             self.c_change = 0
             self.dir = "down"
 
- 
+        # Check if the snake has collided with the boundaries of the game area
         if self.c1 >= self.game_width // self.snake_size or self.c1 < 0 or self.r1 >= self.game_height // self.snake_size or self.r1 < 0:
             self.game_close = True
+        # Update the snake's head position based on the direction
         self.c1 += self.c_change
         self.r1 += self.r_change
         
+        # Clear the screen with a black color
         self.screen.fill(self.color.black)
+        # Draw the game border
         pygame.draw.rect(self.screen, (255, 255, 255), (0, self.padding, self.game_width, self.game_height), 1)
 
-        
+        # Get the coordinates of the food and draw it
         food_x, food_y = self.index_to_coords(self.food_r, self.food_c)
         pygame.draw.rect(self.screen, self.color.red, [food_x, food_y, self.food_size, self.food_size])
         
         self.snake_coords.append((self.r1, self.c1))
         
+        
+        # Check if the new head position is valid
         if self.valid_index(self.r1, self.c1):
             self.board[self.r1][self.c1] = 1
         
+        # Manage the length of the snake
         if len(self.snake_coords) > self.snake_length:
             rd, cd = self.snake_coords[0]
             del self.snake_coords[0]
             if self.valid_index(rd, cd):
                 self.board[rd][cd] = 0
- 
+
+        # Check for collision with itself
         for r, c in self.snake_coords[:-1]:
             if r == self.r1 and c == self.c1:
                 self.game_close = True
@@ -217,7 +256,7 @@ class VisualSnake:
         pygame.display.update()
 
         # pass in pickle file with q table (stored in directory pickle with file name being episode #.pickle)
-        filename = f"pickle/{episode}.pickle"
+        filename = f"SnakeGame_Qlearning/pickle/{episode}.pickle"
         with open(filename, 'rb') as file:
             table = pickle.load(file)
         time.sleep(5)
@@ -252,6 +291,6 @@ class VisualSnake:
             
 
 if __name__ == "__main__":
-    episode = 100
-    snake = VisualSnake()
-    snake.run_game(episode)
+    episode = 1000 # Set the number of episodes to run; you can adjust this value as needed
+    snake = VisualSnake() # Create an instance of the VisualSnake class
+    snake.run_game(episode) # Call the run_game method with the specified episode count

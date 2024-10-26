@@ -29,8 +29,10 @@ Install necessary python libraries as
 `pip install pygame numpy`
 
 ## Usage
+To train q_agent run `python snakeql.py`
 To start the game with a particular episode, first set the episode number in main function in game.py and run the following command:
-python game.py
+
+`python game.py`
 
 ## Q-table Explanation
 The Q-table is a multi-dimensional array that stores the expected rewards for each state-action pair. Each dimension represents a feature of the game state, and the last dimension corresponds to the possible actions (up, down, left, right).

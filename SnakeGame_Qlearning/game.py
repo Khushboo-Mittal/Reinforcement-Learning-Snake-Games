@@ -1,3 +1,11 @@
+#-----------------------------------------------------------------------------------------------------------------------------------
+
+
+# This code is based on the tutorial "AI Learns to Play Snake - Q Learning Explanation" by "Tech Tribe"
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------
+
 import random
 import numpy as np
 import pygame
@@ -12,8 +20,8 @@ class Color:
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
         self.red = (255, 0, 0)
-        self.blue = (50, 150, 255)
-        self.green = (200, 255, 0)
+        self.blue = (30, 60, 90)  
+        self.green = (0, 100, 0)
         
 
 class VisualSnake:
@@ -23,7 +31,7 @@ class VisualSnake:
         self.episode = None
         
         # scale adjusts size of whole board (use 1.0 or 2.0)
-        self.scale = 2
+        self.scale = 1
         self.game_width = int(600 * self.scale)
         self.game_height = int(400 * self.scale)
         
@@ -79,15 +87,15 @@ class VisualSnake:
         self.step()
         
     def print_score(self, score):
-        # Render the score text with white color
-        value = self.font.render(f"Score: {score}", True, self.color.white)
+        # Render the score text with green color
+        value = self.font.render(f"Score: {score}", True, self.color.green)
         self.screen.blit(value, [500 * self.scale, 10])
         
     def print_episode(self):
         # Check if the episode number should be displayed
         if self.show_episode:
-            # Render the episode text with white color
-            value = self.font.render(f"Episode: {self.episode}", True, self.color.white)
+            # Render the episode text with green color
+            value = self.font.render(f"Episode: {self.episode}", True, self.color.green)
             # Display the episode number on the screen at specified coordinates
             self.screen.blit(value, [10, 10])
         
@@ -209,8 +217,8 @@ class VisualSnake:
         self.c1 += self.c_change
         self.r1 += self.r_change
         
-        # Clear the screen with a black color
-        self.screen.fill(self.color.black)
+        # Clear the screen with a white color
+        self.screen.fill(self.color.white)
         # Draw the game border
         pygame.draw.rect(self.screen, (255, 255, 255), (0, self.padding, self.game_width, self.game_height), 1)
 

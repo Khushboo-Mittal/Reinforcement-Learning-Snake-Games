@@ -2,12 +2,18 @@
 This repository contains a Python implementation of the classic Snake game enhanced with a Q-learning algorithm for AI-driven gameplay. The game utilizes the Pygame library for graphics and user interaction, and it features a visual representation of the snake's movements and the environment.
 
 ## Table of Contents
+- Acknowledgments
 - Reinforcement Learning
 - Features
 - Installation
 - Usage
 - Q-table Explanation
 - Game Execution
+
+
+## Acknowledgments
+This code is based on the tutorial "AI Learns to Play Snake - Q Learning Explanation" by "Tech Tribe"
+
 
 ## Reinforcement Learning
 Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. The key components of reinforcement learning include:
@@ -29,6 +35,8 @@ Install necessary python libraries as
 `pip install pygame numpy`
 
 ## Usage
+To train the q learning agent, run the following command in snakeql.py:
+python snakeql.py
 To start the game with a particular episode, first set the episode number in main function in game.py and run the following command:
 python game.py
 
@@ -44,4 +52,3 @@ The run_game function is the main driver for executing the game for a specific e
 - Loads a Q-table from a file corresponding to the episode number.
 - Controls the game loop and checks for end conditions.
 - Ends the game and displays the score if the snake dies.
-

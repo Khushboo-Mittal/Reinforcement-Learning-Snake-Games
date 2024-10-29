@@ -66,11 +66,11 @@ actor_optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 critic_optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 
 # Training parameters
-gamma = 0.99
+gamma = 0.99 # Discount factor to weigh future rewards.
 num_episodes = 1000
 max_steps = 200
 success_threshold = 0.9  # Early stopping success rate threshold
-epsilon = 0.1 
+epsilon = 0.1 # probability of exploratory action
 epsilon_min = 0.01  # Minimum exploration rate
 epsilon_decay = 0.995  # Decay rate per episode
 
@@ -94,13 +94,14 @@ for episode in range(num_episodes):
             # Visualize environment at each step
             visualize_environment(env, state, episode, step, fig, ax)
 
-            state_one_hot = np.identity(state_size)[state]  # One-hot encode state
-            state_input = np.array([state_one_hot])
+            state_one_hot = np.identity(state_size)[state]  # One-hot encode state into a 16-dimensional vector
+            state_input = np.array([state_one_hot]) #shapes this vector as an input for the networks
 
             # Get action probabilities from actor and sample an action
             action_probs = actor_model(state_input, training=True)
-            action = np.random.choice(action_size, p=action_probs.numpy().flatten())
+            action = np.random.choice(action_size, p=action_probs.numpy().flatten()) # samples an action based on these probabilities
 
+            #epsilon-greedy exploration
             if np.random.rand() < epsilon:
                 action = np.random.choice(action_size)
             else:
@@ -114,7 +115,7 @@ for episode in range(num_episodes):
 
             # Modify reward for holes and end of episode
             if next_state in holes:
-                reward = -0.4  # Penalize for falling into a hole
+                reward = -0.5  # Penalize for falling into a hole
             elif done and reward == 0:  # If episode ends without reaching goal
                 reward = -0.2  # Smaller penalty for failing to reach the goal
 
@@ -133,6 +134,8 @@ for episode in range(num_episodes):
             # Stop if episode is done
             if done:
                 break
+
+    # reduces exploration over time, helping the policy converge
     epsilon = max(epsilon_min, epsilon * epsilon_decay)
     # Compute gradients and apply updates
     actor_gradients = tape.gradient(actor_loss, actor_model.trainable_variables)

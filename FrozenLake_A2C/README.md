@@ -5,7 +5,8 @@ This project contains the implementation of a FrozenLake Game trained with the *
 ---
 
 ## Table of Contents
-- [Project Overview](#project-overview)  
+- [Project Overview](#project-overview)
+- [Acknowlwdgement](#acknowledgement)
 - [Features](#features)  
 - [Installation](#installation)  
 - [How to Run](#how-to-run)  
@@ -23,6 +24,11 @@ Reaching the goal while avoiding holes on the board.
 Learning an optimal policy through an actor-critic approach, where the actor selects actions, and the critic estimates the value of each state.
 Leveraging both policy gradients and value updates to improve over time.
 The project is implemented using **Python 3.11.0** and **TensorFlow 2.16.1** for model building and training.
+
+---
+
+## Acknowledgement
+Inspiration was taken by GeeksForGeeks Article "Actor-Critic Algorithm in Reinforcement Learning".
 
 ---
 

@@ -1,3 +1,5 @@
+# Inspiration for this code was taken from GeeksForGeeks article "Actor-Critic Algorithm in Reinforcement Learning".
+
 import gym
 import numpy as np
 import tensorflow as tf

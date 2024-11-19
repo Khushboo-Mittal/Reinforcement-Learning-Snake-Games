@@ -4,6 +4,17 @@ This document provides descriptions and tasks related to the reinforcement learn
 
 ---
 
+## Business Problem Statement
+
+In today's fast-evolving technology landscape, **Reinforcement Learning (RL)** is increasingly being used to solve complex decision-making problems in various industries, from autonomous vehicles to personalized recommendations. The challenge lies in developing algorithms that can learn optimal strategies from interaction with an environment. 
+
+The project demonstrates the application of RL through four algorithms: **SARSA**, **Q-Learning**, **DQN**, and **Actor-Critic (A2C)**, implemented in the context of a **Snake Game** and the **Frozen Lake** environment. Each algorithm learns to maximize rewards while avoiding penalties, which can directly translate to various real-world applications such as **game AI**, **robotics**, and **autonomous systems**. 
+
+The business problem this project addresses is the development of **intelligent agents** capable of learning optimal strategies through **trial and error**, thereby improving their performance over time, which is essential for creating adaptive systems in unpredictable environments.
+
+---
+
+
 ## DQN (Deep Q-Network) for Snake Game
 
 **Description:**

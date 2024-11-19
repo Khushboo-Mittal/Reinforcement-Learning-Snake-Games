@@ -22,7 +22,8 @@
         
             
             
-#to run: python app.py  
+#to run: python app.py 
+# Inspiration for this code was taken from GeeksForGeeks article "SARSA Reinforcement Learning". 
 
 import pygame
 import matplotlib.pyplot as plt  # Importing for plotting

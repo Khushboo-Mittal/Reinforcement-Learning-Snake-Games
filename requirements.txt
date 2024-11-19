@@ -1,0 +1,24 @@
+# This file contains the necessary Python package dependencies for the Reinforcement Learning algorithms 
+# implemented in this project. These packages are required to run the different algorithms and environments 
+# such as Snake Game with DQN, SARSA, Q-Learning, and the Frozen Lake environment with A2C.
+
+# Dependencies:
+# - numpy: A package for numerical operations, required for array manipulation and math functions.
+# - gym: A toolkit for developing and comparing RL environments. Used for creating the Frozen Lake environment.
+# - matplotlib: A plotting library to visualize the training process (e.g., rewards, losses).
+# - tensorflow: A deep learning framework used for implementing DQN with neural networks.
+# - torch: A deep learning framework used for implementing reinforcement learning models (e.g., A2C).
+# - stable-baselines3: A set of reliable implementations of RL algorithms for use with OpenAI Gym.
+# - pytorch-lightning: A wrapper for PyTorch that simplifies training and helps with model scaling.
+# - pandas: A library for data manipulation and analysis (e.g., storing and analyzing results).
+# - scikit-learn: A machine learning library for additional utilities like model selection and preprocessing.
+
+numpy==1.23.1
+gym==0.26.0
+matplotlib==3.6.0
+tensorflow==2.11.0
+torch==1.13.1
+stable-baselines3==2.0.0
+pytorch-lightning==1.8.6
+pandas==1.4.3
+scikit-learn==1.1.1

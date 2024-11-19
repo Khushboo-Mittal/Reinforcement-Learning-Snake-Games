@@ -1,0 +1,34 @@
+DIY_ReinforcementLearning/
+    ├── /DQN_SnakeGame
+    │   ├── dqn.py                      # Implementation of DQN for Snake Game
+    │   ├── README.md                    # Explanation and instructions for DQN algorithm
+    │
+    ├── /FrozenLake_A2C
+    │   ├── FrozenLake_ActorCriticA2C.py  # Implementation of A2C for Frozen Lake environment
+    │   ├── README.md                    # Explanation and instructions for A2C algorithm
+    │   └── Success Rate graph.png       # Graph for Success Rate in Frozen Lake A2C
+    │
+    ├── /sarsa_snake
+    │   ├── __pycache__                  # Folder for Python bytecode
+    │   ├── app.py                       # Main application file for SARSA Snake Game
+    │   ├── apple.png                    # Image file for apple in the game
+    │   ├── agent_reward_figure.png      # Visualization of agent rewards
+    │   ├── models.py                    # Model and SARSA implementation
+    │   ├── q_table.pkl                  # Q-table for SARSA model
+    │   ├── Q.txt                        # Text file with Q-table data
+    │   ├── snakehead.png                # Image file for snake head in the game
+    │   ├── README.md                    # Explanation and instructions for SARSA algorithm
+    │   └── ReinforcementLearning.py      # Main reinforcement learning logic for the Snake Game
+    │
+    ├── /qlearning_snake
+    │   ├── __pycache__                  # Folder for Python bytecode
+    │   ├── pickle                        # Folder to store serialized models
+    │   ├── game.py                      # Main game logic for Q-Learning Snake Game
+    │   ├── snake.py                     # Snake Game implementation file
+    │   ├── snakeql.py                   # Q-learning algorithm implementation
+    │   ├── README.md                    # Explanation and instructions for Q-Learning algorithm
+    │
+    ├── requirements.txt                 # Root-level requirements file containing common dependencies
+    ├── prompts.md                       # Descriptions and tasks for each algorithm
+    ├── folder_structure.txt             # Explains the folder structure and organization of the project
+    └── README.md                        # Overview of the project and its objectives

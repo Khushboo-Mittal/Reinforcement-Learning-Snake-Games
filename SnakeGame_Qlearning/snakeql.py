@@ -1,3 +1,29 @@
+# META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Developer details: 
+        # Name: Harshita Jangde
+        # Role: Architect
+
+    # Version:
+        # Version: V 1.0 (24 October 2024)
+            # Developers: Harshita Jangde
+            # Unit test: Pass
+            # Integration test: Pass
+     
+    # Description: This code snippet implements a Q-Learning-based Snake Game using Python and Pygame. The snake is 
+    # trained through Reinforcement Learning to learn optimal movement strategies by exploring the environment and 
+    # updating the Q-table. The objective of the game is to avoid collisions while eating apples placed randomly in the 
+    # game field. The Q-Learning algorithm is used to find an optimal policy for the agent by balancing exploration and 
+    # exploitation.
+
+# CODE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Dependency: 
+        # Environment:     
+            # Python: 3.11.5
+            # Pygame: 2.1.0
+            # NumPy: 1.23.1
+
 #-----------------------------------------------------------------------------------------------------------------------------------
 
 

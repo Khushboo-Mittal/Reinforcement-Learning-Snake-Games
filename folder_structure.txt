@@ -1,3 +1,9 @@
+# Project Folder Structure
+
+This document outlines the folder structure of the project, detailing the purpose of each directory and file.
+
+
+
 DIY_ReinforcementLearning/
     ├── /DQN_SnakeGame
     │   ├── dqn.py                      # Implementation of DQN for Snake Game

@@ -1,54 +1,73 @@
-# SNAKE GAME WITH Q-LEARNING
-This repository contains a Python implementation of the classic Snake game enhanced with a Q-learning algorithm for AI-driven gameplay. The game utilizes the Pygame library for graphics and user interaction, and it features a visual representation of the snake's movements and the environment.
+# Snake Game with Q-Learning
+
+This project implements a classic Snake game using Q-learning for reinforcement learning. The agent learns how to play the game by interacting with the environment and adjusting its behavior based on rewards.
+
+---
 
 ## Table of Contents
-- Acknowledgments
-- Reinforcement Learning
-- Features
-- Installation
-- Usage
-- Q-table Explanation
-- Game Execution
 
+- [Reinforcement Learning](#reinforcement-learning)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Q-table Explanation](#q-table-explanation)
+- [Game Execution](#game-execution)
 
-## Acknowledgments
-This code is based on the tutorial "AI Learns to Play Snake - Q Learning Explanation" by "Tech Tribe"
-
+---
 
 ## Reinforcement Learning
-Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. The key components of reinforcement learning include:
 
-- **Agent**: The learner or decision-maker (in this case, the Snake).
-- **Environment**: The context within which the agent operates (the game grid).
-- **State**: A representation of the current situation of the agent (e.g., the position of the snake and the food).
-- **Action**: A set of all possible moves the agent can take (e.g., moving up, down, left, or right).
-- **Reward**: A feedback signal that evaluates the outcome of an action (e.g., positive reward for eating food, negative reward for hitting a wall).
+In this project, we use Q-learning, a popular reinforcement learning algorithm, to train an agent to play the Snake game. The agent takes actions to move the snake, receives rewards for eating food, and negative penalties for colliding with walls or itself. The agent learns the optimal policy by interacting with the environment over multiple episodes.
+
+---
 
 ## Features
-- Interactive Gameplay: Play the classic Snake game with controls for manual gameplay.
-- AI Agent: Implemented Q-learning for an AI agent to play the game automatically.
-- Visual Representation: A clear visual representation of the snake, food, and score.
-- Customizable Parameters: Easily adjustable game settings such as snake speed and scaling.
+
+- **Snake Game**: Classic Snake game with dynamic gameplay.
+- **Q-Learning Agent**: An AI agent that learns how to play the game through exploration and exploitation of actions.
+- **Rewards and Penalties**: Positive rewards for eating food and negative rewards for dying.
+- **Customizable Game**: Adjustable grid size, block size, and other parameters.
+- **Training Progress**: The agent's learning progress can be observed with the evolving epsilon (exploration rate) and the score.
+
+---
 
 ## Installation
-Install necessary python libraries as 
-`pip install pygame numpy`
+
+To run this project, you need to install the necessary dependencies. You can install them via `pip`:
+
+1. Clone the repository:
+   `git clone https://github.com/CodeCrafters-preprod/DIY_ReinforcementLearning.git`
+2. Intsall dependencies:
+   `pip install -r requirements.txt`
+
+---
 
 ## Usage
-To train the q learning agent, run the following command in snakeql.py:
-`python snakeql.py`
-To start the game with a particular episode, first set the episode number in main function in game.py and run the following command:
-`python game.py`
+
+To train the Q-learning agent, simply run the following command:
+`python q_learning.py`
+This will begin training the agent, and the game will be rendered every 100 episodes. The agent will improve its performance over time as it learns through trial and error.
+
+---
 
 ## Q-table Explanation
-The Q-table is a multi-dimensional array that stores the expected rewards for each state-action pair. Each dimension represents a feature of the game state, and the last dimension corresponds to the possible actions (up, down, left, right).
-`self.table = np.zeros((2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4))`
-- The first 12 dimensions represent binary states of the game.
-- The last dimension (size 4) corresponds to the available actions.
-During training, the Q-values are updated using the Bellman equation, allowing the agent to learn optimal strategies for playing the game.
+
+The Q-table stores the state-action values that represent the agent’s knowledge about the environment. Each entry in the Q-table corresponds to a state-action pair, with the associated Q-value indicating the expected reward of taking that action in that state.
+
+- **State:** A combination of the snake's position, the relative location of food, and any imminent dangers (like walls or the snake’s body).
+- **Action:** The action taken by the agent (moving up, down, left, or right).
+- **Q-value:** A measure of the expected long-term reward for taking an action in a given state.
+The Q-values are updated using the Bellman equation after each action.
+
+---
 
 ## Game Execution
-The run_game function is the main driver for executing the game for a specific episode:
-- Loads a Q-table from a file corresponding to the episode number.
-- Controls the game loop and checks for end conditions.
-- Ends the game and displays the score if the snake dies.
+
+The Snake game is rendered using the pygame library, and the agent's performance can be observed during the training process. The score is displayed on the screen, and the number of episodes is updated as the agent progresses.
+
+After training, the agent's learned Q-table can be saved to a file and reused for further testing or deployment.
+
+
+
+
+

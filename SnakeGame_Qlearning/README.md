@@ -45,7 +45,7 @@ To run this project, you need to install the necessary dependencies. You can ins
 ## Usage
 
 To train the Q-learning agent, simply run the following command:
-`python q_learning_agent.py`
+`python q_learning.py`
 This will begin training the agent, and the game will be rendered every 100 episodes. The agent will improve its performance over time as it learns through trial and error.
 
 ---

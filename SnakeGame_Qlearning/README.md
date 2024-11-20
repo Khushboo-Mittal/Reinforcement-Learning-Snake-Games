@@ -36,7 +36,7 @@ In this project, we use Q-learning, a popular reinforcement learning algorithm, 
 To run this project, you need to install the necessary dependencies. You can install them via `pip`:
 
 1. Clone the repository:
-   `git clone <repository_url>`
+   `git clone https://github.com/CodeCrafters-preprod/DIY_ReinforcementLearning.git`
 2. Intsall dependencies:
    `pip install -r requirements.txt`
 

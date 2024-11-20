@@ -28,10 +28,9 @@ DIY_ReinforcementLearning/
     │
     ├── /qlearning_snake
     │   ├── __pycache__                  # Folder for Python bytecode
-    │   ├── pickle                        # Folder to store serialized models
-    │   ├── game.py                      # Main game logic for Q-Learning Snake Game
-    │   ├── snake.py                     # Snake Game implementation file
-    │   ├── snakeql.py                   # Q-learning algorithm implementation
+    │   ├── q_table.pkl                        # Q table for Q-Learning
+    │   ├── snake_game.py                      # Main game logic for Q-Learning Snake Game
+    │   ├── q_learning.py                   # Q-learning algorithm implementation
     │   ├── README.md                    # Explanation and instructions for Q-Learning algorithm
     │
     ├── requirements.txt                 # Root-level requirements file containing common dependencies

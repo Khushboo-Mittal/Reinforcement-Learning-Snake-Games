@@ -94,14 +94,15 @@ SARSA_SnakeGame/
    - The Q-table stores the expected rewards for state-action pairs.
    - The snake selects actions based on an **epsilon-greedy policy** (random or optimal).
    - After each move, the Q-value is updated using the formula:  
-     \[
-     Q(s, a) = Q(s, a) + \alpha \left[ r + \gamma Q(s', a') - Q(s, a) \right]
-     \]  
+     ```
+     Q(s, a) = Q(s, a) + α [ r + γ Q(s', a') - Q(s, a) ]
+     ```  
    - Where:
-     - \(Q(s, a)\) is the Q-value of the current state-action pair.
-     - \(r\) is the reward.
-     - \(Q(s', a')\) is the future Q-value.
-     - \(\alpha\) is the learning rate, and \(\gamma\) is the discount factor.
+     - `Q(s, a)` is the Q-value of the current state-action pair.
+     - `r` is the reward.
+     - `Q(s', a')` is the future Q-value.
+     - `α` is the learning rate, and `γ` is the discount factor.
+
 
 ### 2. **Game Logic**
 - **Snake Movement and Collision**:  

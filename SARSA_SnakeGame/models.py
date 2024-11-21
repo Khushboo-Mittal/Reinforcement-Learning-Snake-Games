@@ -17,8 +17,10 @@
 
     # Dependency: 
         # Environment:     
-            # Python: 3.11.5
-            # Pygame: 2.1.0
+            # Python: 3.12.4
+            # Pygame: 2.6.1
+            # matplotlib==3.9.2
+            # numpy==2.1.3
         
             
             

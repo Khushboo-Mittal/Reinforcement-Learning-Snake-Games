@@ -22,7 +22,7 @@ This game uses **SARSA reinforcement learning** to train a snake agent. The agen
 - Avoiding collisions with walls or itself.
 - Learning a Q-table that represents optimal actions for given states.
 
-The project is implemented using **Python 3.11.5** and **Pygame 2.1.0** for visual rendering of the game environment.
+The project is implemented using **Python 3.12.4** and **Pygame 2.6.1** for visual rendering of the game environment.
 
 ---
 
@@ -37,12 +37,24 @@ The project is implemented using **Python 3.11.5** and **Pygame 2.1.0** for visu
 
 ## Installation
 1. Clone the repository from GitHub.
-2. Make sure Python 3.11.5 and Pygame 2.1.0 are installed.
-
-   Use the following commands to install Pygame:
+2. Make sure you are using **Python 3.12.4** and install the required libraries using **pip**.
+   
+   To create a virtual environment (recommended), run the following commands:
    ```bash
-   pip install pygame
+   python -m venv venv
+   venv\Scripts\activate   # On Windows
+   source venv/bin/activate   # On macOS/Linux
    ```
+
+3. Install the dependencies using:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. This will install:
+   - **pygame==2.6.1**
+   - **matplotlib==3.9.2**
+   - **numpy==2.1.3**
 
 ---
 
@@ -57,16 +69,20 @@ The project is implemented using **Python 3.11.5** and **Pygame 2.1.0** for visu
 
 ## Project Structure
 ```
-SARSA/
+SARSA_SnakeGame/
 │
-├── app.py                    # Main entry point to run the game
-├── models.py                 # Contains the Apple and Snake classes for the game logic
-├── ReinforcementLearning.py  # SARSA algorithm implementation
-├── q_table.pkl               # Pickled Q-table for saving and loading learned data
+├── __pycache__/            # Compiled Python files generated during execution
 ├── agent_reward_figure.png   # Visualization of rewards earned by the agent
+├── app.py                    # Main entry point to run the game
 ├── apple.png                 # Apple image for the game
-├── snakehead.png             # Snake head image
-└── Q.txt                     # Text representation of the Q-table
+├── models.py                 # Contains the Apple and Snake classes for the game logic
+├── prompts.md     # Business problem statement and conceptual questions for the SARSA algorithm
+├── q_table.pkl               # Pickled Q-table for saving and loading learned data
+├── Q.txt                     # Text representation of the Q-table
+├── README.md                  # Project documentation
+├── ReinforcementLearning.py  # SARSA algorithm implementation
+├── requirements.txt     # required libraries for the implementation
+└── snakehead.png             # Snake head image
 ```
 
 ---
@@ -106,12 +122,15 @@ SARSA/
 ---
 
 ## Dependencies
-- **Python**: 3.11.5  
-- **Pygame**: 2.1.0  
-   Install dependencies with:
-   ```bash
-   pip install pygame
-   ```
+- **Python**: 3.12.4 
+- **Pygame**: 2.6.1 
+- **Matplotlib**: 3.9.2 
+- **NumPy**: 2.1.3 
+
+Install dependencies with:
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
@@ -120,6 +139,5 @@ SARSA/
 - **Version**: V 1.0 (24 October 2024)  
 - **Unit Test**: Pass  
 - **Integration Test**: Pass  
-
 
 

@@ -18,13 +18,13 @@
 # CODE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
     # Dependency: 
-        # Environment:     
-            # Python: 3.11.5
-            # TensorFlow: 2.11.0
-            # Keras: 2.11.0
-            # NumPy: 1.23.1
-            # OpenAI Gym: 0.26.0
-            # Matplotlib: 3.6.0
+        # Environment: 
+        # Python version: 3.11.0   
+        # pygame==2.5.0
+        # numpy==1.23.0
+        # keras==2.18.0
+        # tensorflow==2.18.0
+        # matplotlib==3.8.0
 
 
 import pygame

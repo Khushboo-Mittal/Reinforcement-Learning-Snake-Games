@@ -37,9 +37,14 @@ Install the dependencies using:
 pip install pygame numpy matplotlib tensorflow keras
 ```
 
-## File Structure
-
-- **`dqn.py`**: The main script containing the game logic, DQN agent implementation, and training loop.
+## Folder Structure
+```
+/ DQN_SnakeGame
+    ├── dqn.py                  # Implementation of the DQN algorithm for training the Snake Game
+    ├── prompts.md              # Contains business problem statements and conceptual questions for DQN
+    ├── requirements.txt        # Lists all required dependencies to run the DQN implementation
+    └── README.md               # Documentation providing an overview of the DQN Snake Game project
+```
 
 ## How It Works
 

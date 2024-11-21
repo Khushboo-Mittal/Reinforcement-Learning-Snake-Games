@@ -9,6 +9,7 @@ This project implements a classic Snake game using Q-learning for reinforcement 
 - [Reinforcement Learning](#reinforcement-learning)
 - [Features](#features)
 - [Installation](#installation)
+- [Project Structure](#project-structure)
 - [Usage](#usage)
 - [Q-table Explanation](#q-table-explanation)
 - [Game Execution](#game-execution)
@@ -40,6 +41,19 @@ To run this project, you need to install the necessary dependencies. You can ins
 2. Intsall dependencies:
    `pip install -r requirements.txt`
 
+---
+
+## Project Structure
+```
+/ SnakeGame_Qlearning
+    ├── __pycache__/            # Compiled Python files generated during execution
+    ├── prompts.md              # Contains business problem statements and conceptual questions for Q-Learning
+    ├── q_learning.py           # Q-Learning algorithm implementation for the Snake Game
+    ├── q_table.pkl             # Serialized Q-table storing learned state-action values
+    ├── README.md               # Documentation providing an overview of the Q-Learning implementation
+    ├── requirements.txt        # Dependencies required to run the Q-Learning algorithm
+    └── snake_game.py           # Main Python file to run and visualize the Snake Game
+```
 ---
 
 ## Usage

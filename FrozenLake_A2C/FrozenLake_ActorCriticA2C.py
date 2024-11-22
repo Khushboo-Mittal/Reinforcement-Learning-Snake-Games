@@ -26,156 +26,167 @@
             # matplotlib>=3.6.0,<4.0.0
 # Inspiration for this code was taken from GeeksForGeeks article "Actor-Critic Algorithm in Reinforcement Learning".
 
-import gym
-import numpy as np
-import tensorflow as tf
-from tensorflow.keras import layers
-import matplotlib.pyplot as plt
-from matplotlib import colors
-from collections import deque
-import pickle
-import os
+# Import necessary libraries
+import gym  # OpenAI Gym for creating and managing the FrozenLake environment
+import numpy as np  # For numerical operations
+import tensorflow as tf  # For building neural networks
+from tensorflow.keras import layers  # For defining neural network layers
+import matplotlib.pyplot as plt  # For visualization
+from matplotlib import colors  # For custom colormap for the environment visualization
+from collections import deque  # For maintaining a fixed-length queue for recent rewards
+import pickle  # For saving and loading model weights
+import os  # For file management
 
+# Paths to save actor and critic model weights
 actor_model_path = "actor_model_weights.pkl"
 critic_model_path = "critic_model_weights.pkl"
 
 # Initialize the FrozenLake environment
-env = gym.make("FrozenLake-v1", is_slippery=False)
-state_size = env.observation_space.n
-action_size = env.action_space.n
+env = gym.make("FrozenLake-v1", is_slippery=False)  # Create a deterministic FrozenLake environment
+state_size = env.observation_space.n  # Number of discrete states in the environment (16 for 4x4 grid)
+action_size = env.action_space.n  # Number of possible actions (4: left, down, right, up)
 
-# Function to visualize the environment grid in a single plot
+# Function to visualize the FrozenLake environment in a grid format
 def visualize_environment(env, state, episode, step, fig, ax):
-    grid_size = (4, 4)
-    grid = np.zeros(grid_size)
+    grid_size = (4, 4)  # FrozenLake is a 4x4 grid
+    grid = np.zeros(grid_size)  # Initialize a grid with zeros to represent states
 
-    # Mark the goal
-    goal_state = 15
-    grid[goal_state // 4, goal_state % 4] = 1  # Mark the goal with a 1
+    # Mark the goal state in the grid
+    goal_state = 15  # The bottom-right corner is the goal
+    grid[goal_state // 4, goal_state % 4] = 1  # Mark goal with a value of 1
 
-    # Mark the holes
-    holes = [5, 7, 11, 12]
+    # Mark the holes in the grid
+    holes = [5, 7, 11, 12]  # Locations of holes in the grid
     for hole in holes:
-        grid[hole // 4, hole % 4] = 0.5  # Mark holes with 0.5
-    # Mark the agent's position
+        grid[hole // 4, hole % 4] = 0.5  # Mark holes with a value of 0.5
+
+    # Mark the agent's current position
     agent_position = state
-    grid[agent_position // 4, agent_position % 4] = 0.75  # Mark agent with 0.75
+    grid[agent_position // 4, agent_position % 4] = 0.75  # Mark agent with a value of 0.75
 
+    # Plot the grid
     ax.clear()  # Clear the previous plot
-    cmap = colors.ListedColormap(['lightblue', 'yellow', 'blue', 'red'])
-    bounds = [0, 0.25, 0.5, 0.75, 1]
-    norm = colors.BoundaryNorm(bounds, cmap.N)
+    cmap = colors.ListedColormap(['lightblue', 'yellow', 'blue', 'red'])  # Define colors for the grid
+    bounds = [0, 0.25, 0.5, 0.75, 1]  # Define boundaries for color mapping
+    norm = colors.BoundaryNorm(bounds, cmap.N)  # Normalize the grid values to the colormap
 
-    ax.imshow(grid, cmap=cmap, norm=norm)
-    ax.set_xticks([])  # Remove x ticks
-    ax.set_yticks([])  # Remove y ticks
-    ax.set_title(f'Episode {episode} / Step {step}')
-    plt.draw()
-    plt.pause(0.05)  # Short pause to allow for real-time updates
+    ax.imshow(grid, cmap=cmap, norm=norm)  # Display the grid
+    ax.set_xticks([])  # Remove x-axis ticks
+    ax.set_yticks([])  # Remove y-axis ticks
+    ax.set_title(f'Episode {episode} / Step {step}')  # Set plot title with current episode and step
+    plt.draw()  # Update the plot
+    plt.pause(0.05)  # Pause for a short time to allow for real-time updates
 
 # Build the actor model
+# This model outputs probabilities for each action given a state
 actor_model = tf.keras.Sequential([
-    layers.Dense(64, input_dim=state_size, activation='relu'),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(action_size, activation='softmax')
+    layers.Dense(64, input_dim=state_size, activation='relu'),  # First hidden layer
+    layers.Dense(64, activation='relu'),  # Second hidden layer
+    layers.Dense(action_size, activation='softmax')  # Output layer with softmax for action probabilities
 ])
 
 # Build the critic model
+# This model estimates the value of a given state
 critic_model = tf.keras.Sequential([
-    layers.Dense(64, input_dim=state_size, activation='relu'),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(1)  # Single output for the state value
+    layers.Dense(64, input_dim=state_size, activation='relu'),  # First hidden layer
+    layers.Dense(64, activation='relu'),  # Second hidden layer
+    layers.Dense(1)  # Single output node for state value
 ])
 
-# Optimizers for the actor and critic
-actor_optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
-critic_optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
+# Define optimizers for training the actor and critic models
+actor_optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)  # Learning rate for actor
+critic_optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)  # Learning rate for critic
 
-# Training parameters
-gamma = 0.99 # Discount factor to weigh future rewards.
-num_episodes = 1000
-max_steps = 200
-success_threshold = 0.9  # Early stopping success rate threshold
-epsilon = 0.1 # probability of exploratory action
-epsilon_min = 0.01  # Minimum exploration rate
-epsilon_decay = 0.995  # Decay rate per episode
+# Hyperparameters for training
+gamma = 0.99  # Discount factor to weigh future rewards
+num_episodes = 1000  # Total number of training episodes
+max_steps = 200  # Maximum steps per episode
+success_threshold = 0.9  # Early stopping threshold for success rate
+epsilon = 0.1  # Initial probability of choosing a random action (exploration)
+epsilon_min = 0.01  # Minimum exploration probability
+epsilon_decay = 0.995  # Decay rate for exploration probability per episode
 
-# Tracking success rate over recent episodes
-recent_rewards = deque(maxlen=100)  # Store rewards for the last 100 episodes
+# Initialize trackers for success rates and recent rewards
+recent_rewards = deque(maxlen=100)  # Maintain a rolling window of the last 100 rewards
 success_rates = []  # Store success rates for plotting
 
-# Set up the plotting window outside the loop
-fig, ax = plt.subplots()
-goal_state = 15
-holes = [5, 7, 11, 12]
+# Set up a visualization window for the environment
+fig, ax = plt.subplots()  # Create a figure and axis for the plot
+goal_state = 15  # Define the goal state
+holes = [5, 7, 11, 12]  # Define the hole states
 
 # Main training loop
 for episode in range(num_episodes):
-    state = env.reset()[0]  # Reset environment and get initial state
-    episode_reward = 0
-    done = False
+    state = env.reset()[0]  # Reset the environment and get the initial state
+    episode_reward = 0  # Initialize total reward for the episode
+    done = False  # Track if the episode has finished
 
-    with tf.GradientTape(persistent=True) as tape:  # Persistent to allow reuse for both models
+    with tf.GradientTape(persistent=True) as tape:  # Persistent tape for calculating both actor and critic gradients
         for step in range(max_steps):
-            # Visualize environment at each step
+            # Visualize the environment at the current step
             visualize_environment(env, state, episode, step, fig, ax)
 
-            state_one_hot = np.identity(state_size)[state]  # One-hot encode state into a 16-dimensional vector
-            state_input = np.array([state_one_hot]) #shapes this vector as an input for the networks
+            # One-hot encode the current state
+            state_one_hot = np.identity(state_size)[state]
+            state_input = np.array([state_one_hot])  # Prepare state as input for the models
 
-            # Get action probabilities from actor and sample an action
+            # Get action probabilities from the actor model
             action_probs = actor_model(state_input, training=True)
-            action = np.random.choice(action_size, p=action_probs.numpy().flatten()) # samples an action based on these probabilities
+            action = np.random.choice(action_size, p=action_probs.numpy().flatten())  # Sample action based on probabilities
 
-            #epsilon-greedy exploration
+            # Epsilon-greedy exploration: choose a random action with probability epsilon
             if np.random.rand() < epsilon:
                 action = np.random.choice(action_size)
             else:
                 action_probs = actor_model(state_input, training=True)
-                action = np.argmax(action_probs.numpy().flatten())
+                action = np.argmax(action_probs.numpy().flatten())  # Choose the action with the highest probability
 
-            # Take action and observe result
+            # Take the chosen action and observe the next state, reward, and termination status
             next_state, reward, done, _, _ = env.step(action)
+
+            # One-hot encode the next state
             next_state_one_hot = np.identity(state_size)[next_state]
             next_state_input = np.array([next_state_one_hot])
 
-            # Modify reward for holes and end of episode
+            # Adjust reward for specific conditions
             if next_state in holes:
                 reward = -0.5  # Penalize for falling into a hole
-            elif done and reward == 0:  # If episode ends without reaching goal
-                reward = -0.2  # Smaller penalty for failing to reach the goal
+            elif done and reward == 0:  # Penalize for failing to reach the goal
+                reward = -0.2
 
-            # Compute state values and advantage
-            state_value = critic_model(state_input, training=True)[0, 0]
-            next_state_value = critic_model(next_state_input, training=True)[0, 0]
-            advantage = reward + gamma * next_state_value - state_value
+            # Calculate state value and advantage
+            state_value = critic_model(state_input, training=True)[0, 0]  # Current state value
+            next_state_value = critic_model(next_state_input, training=True)[0, 0]  # Next state value
+            advantage = reward + gamma * next_state_value - state_value  # Temporal difference (TD) advantage
 
-            # Compute actor and critic losses
-            actor_loss = -tf.math.log(action_probs[0, action]) * advantage
-            critic_loss = tf.square(advantage)
+            # Calculate losses for the actor and critic models
+            actor_loss = -tf.math.log(action_probs[0, action]) * advantage  # Policy gradient loss
+            critic_loss = tf.square(advantage)  # Mean squared error for value estimation
 
+            # Accumulate reward for the episode
             episode_reward += reward
-            state = next_state  # Update the state
+            state = next_state  # Update the current state
 
-            # Stop if episode is done
+            # End the episode if the environment signals done
             if done:
                 break
 
-    # reduces exploration over time, helping the policy converge
+    # Decay epsilon to reduce exploration over time
     epsilon = max(epsilon_min, epsilon * epsilon_decay)
-    # Compute gradients and apply updates
+
+    # Calculate gradients and update model weights
     actor_gradients = tape.gradient(actor_loss, actor_model.trainable_variables)
     critic_gradients = tape.gradient(critic_loss, critic_model.trainable_variables)
     actor_optimizer.apply_gradients(zip(actor_gradients, actor_model.trainable_variables))
     critic_optimizer.apply_gradients(zip(critic_gradients, critic_model.trainable_variables))
 
-    # Store success/failure (1 for reaching the goal, 0 otherwise)
-    recent_rewards.append(1 if reward == 1 else 0)  # Reward 1 indicates success in FrozenLake
+    # Track success or failure for the current episode
+    recent_rewards.append(1 if reward == 1 else 0)  # Reward of 1 indicates success
 
-    # Print episode stats every 10 episodes
+    # Print progress every 10 episodes
     if episode % 10 == 0:
-        success_rate = np.mean(recent_rewards)
-        success_rates.append(success_rate)
+        success_rate = np.mean(recent_rewards)  # Calculate success rate
+        success_rates.append(success_rate)  # Store success rate for plotting
         print(f"Episode {episode}, Reward: {episode_reward}, Success Rate: {success_rate * 100:.2f}%")
 
     # Check early stopping condition
@@ -183,32 +194,17 @@ for episode in range(num_episodes):
         print(f"Early stopping at episode {episode} with success rate {np.mean(recent_rewards) * 100:.2f}%")
         break
 
-# Save the actor and critic model weights after training
+# Save the trained actor and critic model weights
 with open(actor_model_path, 'wb') as f:
     pickle.dump(actor_model.get_weights(), f)
-    
+
 with open(critic_model_path, 'wb') as f:
     pickle.dump(critic_model.get_weights(), f)
 
-print("Models saved successfully!")
-
-# To load the model weights in the future, you can use this:
-with open(actor_model_path, 'rb') as f:
-    actor_weights = pickle.load(f)
-    actor_model.set_weights(actor_weights)
-
-with open(critic_model_path, 'rb') as f:
-    critic_weights = pickle.load(f)
-    critic_model.set_weights(critic_weights)
-
-print("Models loaded successfully!")
-
-env.close()
-
+# Plot success rates over episodes
 plt.figure()
-plt.plot(range(0, len(success_rates) * 10, 10), [sr * 100 for sr in success_rates], marker='o')
-plt.xlabel("Episodes")
-plt.ylabel("Success Rate (%)")
-plt.title("Agent Success Rate Over Time")
-plt.grid()
+plt.plot(success_rates)
+plt.xlabel('Episodes (x10)')
+plt.ylabel('Success Rate')
+plt.title('Training Progress')
 plt.show()

@@ -20,10 +20,10 @@
     # Dependency: 
         # Environment:     
             # Python: 3.11.0
-            # tensorflow
-            # numpy
-            # gym
-            # matplotlib
+            # tensorflow==2.16.1
+            # numpy>=1.23.5,<2.0.0
+            # gym==0.26.2
+            # matplotlib>=3.6.0,<4.0.0
 
 # Inspiration for this code was taken from GeeksForGeeks article "Actor-Critic Algorithm in Reinforcement Learning".
 

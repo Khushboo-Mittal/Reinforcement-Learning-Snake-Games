@@ -1,22 +1,27 @@
-# ================================================================
-# Q-Learning Agent for Snake Game
-# ================================================================
-# This script implements a Q-learning agent to play the Snake game. 
-# The agent learns through trial and error, using a Q-table to store 
-# state-action values and update them based on rewards received in 
-# the game. The agent follows an epsilon-greedy policy to balance 
-# exploration and exploitation.
-#
-# Metadata:
-# Author: Harshita Jangde
-# Date Created: 20-11-2024
-# Purpose: Implement Q-learning to train an agent to play Snake
-# Dependencies:
-#   - numpy
-#   - random
-#   - pickle
-#   - snake_game.py (custom class for Snake game implementation)
-# ================================================================
+# META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Developer details: 
+        # Name: Harshita Jangde
+        # Role: Architect
+    # Version:
+        # Version: V 2.0 (20 November 2024)
+            # Developers: Harshita Jangde
+            # Unit test: Pass
+            # Integration test: Pass
+     
+    # Description: This script implements a Q-learning agent to play the Snake game. 
+    # The agent learns through trial and error, using a Q-table to store 
+    # state-action values and update them based on rewards received in 
+    # the game. The agent follows an epsilon-greedy policy to balance 
+    # exploration and exploitation.
+
+# CODE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Dependency: 
+        # Environment:     
+            # Python: 3.10.8
+            # pygame==2.5.2
+            # numpy==1.23.5
 
 import numpy as np
 import random

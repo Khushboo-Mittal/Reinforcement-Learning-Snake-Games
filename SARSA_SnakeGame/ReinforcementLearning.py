@@ -33,39 +33,48 @@ import numpy as np
 
 class Sarsa:
     def __init__(self, actions, e=0.1, alpha=0.1, gamma=0.9):
-        self.Q = {}  # Initialize the Q-table
-        self.A = actions  # List of possible actions
-        self.e = e  # Exploration rate
-        self.alpha = alpha  # Learning rate
-        self.gamma = gamma  # Discount factor
+        self.Q = {}  # Initialize the Q-table as an empty dictionary to store state-action values
+        self.A = actions  # List of possible actions that the agent can take
+        self.e = e  # Epsilon for the epsilon-greedy policy (exploration rate)
+        self.alpha = alpha  # Learning rate for updating Q-values
+        self.gamma = gamma  # Discount factor for future rewards
 
     def getQ(self, state, action):
-        return self.Q.get((state, action), random.uniform(-0.1, 0.1))  # Random small initial Q-values
+        # Retrieve the Q-value for a given state-action pair
+        # If the Q-value doesn't exist, return a small random value to initialize it
+        return self.Q.get((state, action), random.uniform(-0.1, 0.1))
 
     def updateQ(self, s1, a1, s2, a2, reward):
-        # Update the Q-value using the SARSA formula
-        current_q = self.getQ(s1, a1)
-        future_q = self.getQ(s2, a2)
+        # Update the Q-value using the SARSA update rule
+        current_q = self.getQ(s1, a1)  # Get the current Q-value for the state-action pair
+        future_q = self.getQ(s2, a2)  # Get the Q-value for the next state-action pair
+        # Compute the new Q-value based on the reward and future Q-value
         new_q = current_q + self.alpha * (reward + self.gamma * future_q - current_q)
+        # Update the Q-table with the new Q-value
         self.Q[(s1, a1)] = new_q
 
     def getA(self, state):
-        # Epsilon-greedy policy with decaying epsilon
+        # Determine the action to take in a given state using an epsilon-greedy policy
         if random.random() < self.e:
-            return random.choice(self.A)  # Random action (explore)
+            return random.choice(self.A)  # Choose a random action with probability epsilon (exploration)
+        # Compute Q-values for all actions in the current state
         q_values = [self.getQ(state, a) for a in self.A]
-        max_q = max(q_values)
-        # Get all actions with the highest Q value and choose randomly among them
+        max_q = max(q_values)  # Find the maximum Q-value
+        # Identify all actions that have the maximum Q-value
         best_actions = [a for a, q in zip(self.A, q_values) if q == max_q]
+        # Choose randomly among the best actions to break ties
         return random.choice(best_actions)
 
     def saveQ(self, filename="q_table.pkl"):
+        # Save the Q-table to a file using pickle for persistence
         with open(filename, "wb") as f:
             pickle.dump(self.Q, f)
 
     def loadQ(self, filename="q_table.pkl"):
+        # Load a saved Q-table from a file
         try:
             with open(filename, "rb") as f:
-                self.Q = pickle.load(f)
+                self.Q = pickle.load(f)  # Load the Q-table into memory
         except FileNotFoundError:
+            # Handle the case where the file doesn't exist and start fresh
             print("No Q-table found, starting fresh.")

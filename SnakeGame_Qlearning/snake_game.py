@@ -1,16 +1,27 @@
-# ================================================================
-# Snake Game Implementation for Q-Learning
-# ================================================================
-# This script implements the Snake game, which will be used for 
-# training a Q-learning agent. The game includes all necessary 
-# functions to run the game, reset the game state, update the snake's 
-# position, and provide feedback (reward) based on the snake's actions.
-#
-# Metadata:
-# Author: Harshita Jangde
-# Date Created: 20-11-2024
-# Purpose: Implement Snake game to interact with Q-learning agent
-# ================================================================
+# META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Developer details: 
+        # Name: Harshita Jangde
+        # Role: Architect
+    # Version:
+        # Version: V 2.0 (20 November 2024)
+            # Developers: Harshita Jangde
+            # Unit test: Pass
+            # Integration test: Pass
+     
+    # Description: This script implements the Snake game, which will be used for 
+    # training a Q-learning agent. The game includes all necessary 
+    # functions to run the game, reset the game state, update the snake's 
+    # position, and provide feedback (reward) based on the snake's actions.
+
+
+# CODE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    # Dependency: 
+        # Environment:     
+            # Python: 3.10.8
+            # pygame==2.5.2
+            # numpy==1.23.5
 
 import pygame
 import random

@@ -64,6 +64,8 @@ A2C_FrozenLake/
 ├── actor_model_weights.pkl    # Saved actor model weights
 ├── critic_model_weights.pkl   # Saved critic model weights
 ├── agent_success_rate.png     # Visualization of the agent's success rate over episodes
+├── prompts.md     # Business problem statement and conceptual questions for the A2C algorithm
+├── requirements.txt     # required libraries for the implementation
 └── README.md                  # Project documentation
 
 ```

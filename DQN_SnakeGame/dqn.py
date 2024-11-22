@@ -20,11 +20,11 @@
     # Dependency: 
         # Environment: 
         # Python version: 3.11.0   
-        # pygame==2.5.0
-        # numpy==1.23.0
-        # keras==2.18.0
-        # tensorflow==2.18.0
+        # pygame==2.4.0
+        # numpy==1.24.4
         # matplotlib==3.8.0
+        # tensorflow==2.14.0
+        # keras==2.14.0
 
 
 import pygame

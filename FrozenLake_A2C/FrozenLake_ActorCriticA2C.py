@@ -19,15 +19,11 @@
 
     # Dependency: 
         # Environment:     
-            # Python: 3.11.5
-            # TensorFlow: 2.11.0
-            # PyTorch: 1.13.1
-            # NumPy: 1.23.1
-            # Gym: 0.26.0
-            # Stable-Baselines3: 2.0.0
-            # Matplotlib: 3.6.0
-            # Pandas: 1.4.3
-            # Scikit-learn: 1.1.1
+            # Python: 3.11.0
+            # tensorflow
+            # numpy
+            # gym
+            # matplotlib
 
 # Inspiration for this code was taken from GeeksForGeeks article "Actor-Critic Algorithm in Reinforcement Learning".
 

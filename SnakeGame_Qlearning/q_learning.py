@@ -4,7 +4,7 @@
         # Name: Harshita Jangde
         # Role: Architect
     # Version:
-        # Version: V 2.0 (20 November 2024)
+        # Version: V 1.2 (20 November 2024)
             # Developers: Harshita Jangde
             # Unit test: Pass
             # Integration test: Pass

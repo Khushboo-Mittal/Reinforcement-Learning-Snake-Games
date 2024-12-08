@@ -1,11 +1,11 @@
 # META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
     # Developer details: 
-        # Name: Harshita Jangde
+        # Name: Khushboo Mittal
         # Role: Architect
     # Version:
         # Version: V 1.2 (20 November 2024)
-            # Developers: Harshita Jangde
+            # Developers: Khushboo Mittal
             # Unit test: Pass
             # Integration test: Pass
      

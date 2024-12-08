@@ -133,12 +133,3 @@ Install dependencies with:
 pip install -r requirements.txt
 ```
 
----
-
-## Developer Info
-- **Architect**: Khushboo Mittal  
-- **Version**: V 1.0 (24 October 2024)  
-- **Unit Test**: Pass  
-- **Integration Test**: Pass  
-
-

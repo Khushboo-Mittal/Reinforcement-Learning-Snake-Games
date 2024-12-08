@@ -1,12 +1,12 @@
 # META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
     # Developer details: 
-        # Name: Tanisha Priya
+        # Name: Khushboo Mittal
         # Role: Architect
 
     # Version:
         # Version: V 1.0 (24 October 2024)
-            # Developers: Tanisha Priya
+            # Developers: Khushboo Mittal
             # Unit test: Pass
             # Integration test: Pass
      

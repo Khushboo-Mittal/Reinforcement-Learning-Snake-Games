@@ -22,8 +22,9 @@ Reinforcement learning algorithms like **Deep Q-Learning (DQN)**, **SARSA**, and
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-repo/reinforcement-learning-snake-games.git
-   cd reinforcement-learning-snake-games
+   git clone https://github.com/your-username/Reinforcement-Learning-Snake-Games.git
+   cd Reinforcement-Learning-Snake-Games
+
    ```
 
 2. Navigate to the desired algorithm folder (e.g., `DQN_SnakeGame`, `SARSA_SnakeGame`, `QLearning_SnakeGame`) for specific instructions.

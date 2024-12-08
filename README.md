@@ -2,8 +2,6 @@
 
 This project demonstrates the implementation of various **Reinforcement Learning (RL)** algorithms applied to the classic **Snake Game**. The aim is to train an AI agent to play the game autonomously by learning optimal strategies through interactions with the environment. Each algorithm is implemented in its respective folder with detailed explanations.
 
----
-
 ## Overview
 
 Reinforcement learning algorithms like **Deep Q-Learning (DQN)**, **SARSA**, and **Q-Learning** are explored in this project. Each approach showcases a unique way to train the agent, balancing exploration and exploitation to maximize rewards. The trained agents demonstrate adaptive gameplay, optimizing their performance over time.
@@ -19,8 +17,6 @@ Reinforcement learning algorithms like **Deep Q-Learning (DQN)**, **SARSA**, and
   - Encodes the snake's position, food location, and obstacles to guide decision-making.
 - **Visualization**: Graphs and logs tracking training performance.
 
----
-
 ## How to Use
 
 1. Clone this repository to your local machine:
@@ -33,8 +29,6 @@ Reinforcement learning algorithms like **Deep Q-Learning (DQN)**, **SARSA**, and
 2. Navigate to the desired algorithm folder (e.g., `DQN_SnakeGame`, `SARSA_SnakeGame`, `QLearning_SnakeGame`) for specific instructions.
 
 3. Follow the `README.md` in each folder to set up dependencies, run the training, and visualize results.
-
----
 
 ## Dependencies
 
@@ -52,9 +46,6 @@ pip install -r requirements.txt
 
 Specific dependencies for neural network-based approaches like DQN may include TensorFlow or PyTorch.
 
----
-
 ## Additional Notes
 
-Each folder contains a dedicated `README.md` that explains the respective algorithm, its implementation details, and usage. 
-
+Each folder contains a dedicated `README.md` that explains the respective algorithm, its implementation details, and usage.
